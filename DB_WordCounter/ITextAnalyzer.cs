@@ -8,10 +8,10 @@ namespace DB_WordCounter
 {
     internal interface ITextAnalyzer
     {
-        public int WordCount();
-        public int ParagraphCount();
-        public int LineCount();
-        public int CharacterCount();
-        public int ChapterCount();
+        public Task<int> WordCount(StreamReader reader);
+        public int ParagraphCount(StreamReader reader);
+        public int LineCount(StreamReader reader);
+        public int CharacterCount(StreamReader reader);
+        public int ChapterCount(StreamReader reader);
     }
 }

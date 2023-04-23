@@ -10,36 +10,26 @@ namespace DB_WordCounter
 {
     public class WordCounter : ITextAnalyzer
     {
-        public StreamReader Reader { get; set; }
-        public WordCounter(StreamReader reader) {
-            Reader = reader;
-        }
-        ~WordCounter() { 
-            Reader.Dispose();
-        }
+
+
         /// <summary>
         /// Reads a file and returns number of words
         /// </summary>
         /// <returns> number of words</returns>
-        public int WordCount()
+        public async Task<int> WordCount(StreamReader reader)
         {
             try
             {
                 var wordCount = 0;
-                using (StreamReader sr = Reader)
+                string line;
+                while ((line = await reader.ReadLineAsync()) != null)
                 {
-                    string line;
-                    while ((line = sr.ReadLine()) != null)
-                    {
-#if DEBUG
-                        Debug.WriteLine(line);
-#endif
-                        var regex = @"\b[\S]+\b"; // \b = wordboundary \S all char excluding spaces 
+                    var regex = @"\b[\S]+\b"; // \b = wordboundary \S all char excluding spaces 
 
-                        var matches = Regex.Matches(line, regex, RegexOptions.IgnoreCase | RegexOptions.Multiline);
-                        wordCount += matches.Count;
-                    }
+                    var matches = Regex.Matches(line, regex, RegexOptions.IgnoreCase | RegexOptions.Multiline);
+                    wordCount += matches.Count;
                 }
+                
                 return wordCount;
             }
             catch
@@ -51,27 +41,30 @@ namespace DB_WordCounter
         }
 
 #region futureImplementation
-        
-        public int ChapterCount()
+
+        public int ParagraphCount(StreamReader reader)
         {
             throw new NotImplementedException();
         }
 
-        public int CharacterCount()
+        public int LineCount(StreamReader reader)
         {
             throw new NotImplementedException();
         }
 
-        public int LineCount()
+        public int CharacterCount(StreamReader reader)
         {
             throw new NotImplementedException();
         }
 
-        public int ParagraphCount()
+        public int ChapterCount(StreamReader reader)
         {
             throw new NotImplementedException();
         }
-#endregion
+
+
+
+        #endregion
 
 
     }
