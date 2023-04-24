@@ -20,12 +20,14 @@ namespace DB_WordCounter
 
         }
 
-        public async Task WordSortingInsertion(FileStream stream, IEnumerable<IGrouping<string, string>> groupedWords)
+        public async Task WordSortingInsertion(IEnumerable<IGrouping<string, string>> groupedWords)
         {
-            //TODO: Make loop to write words into their own respective files :D 
-            using (StreamWriter sw = new StreamWriter(stream))
+            var rootPath = @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\";
+            foreach (var word in groupedWords.OrderByDescending(x => x.Count()))
             {
-                foreach (var word in groupedWords.OrderByDescending(x => x.Count()))
+                var currentFilepath = $"FILE_{word.Key.ToUpper().First()}.txt";
+                var fullPath = $@"{rootPath}\{currentFilepath}";
+                using (StreamWriter sw = new StreamWriter(fullPath,true))//new FileStreamOptions() { Access=FileAccess.Write,Mode=FileMode.OpenOrCreate,Options=FileOptions.Asynchronous}))
                 {
                     await sw.WriteLineAsync($"{word.Key} {word.Count()}");
                 }

@@ -9,10 +9,7 @@
 
         internal async Task Insert(string word, StreamWriter writer)
         {
-            var firstLetter = word.ToLower().First();
             await writer.WriteLineAsync(word + " ");
-
-            
         }
     }
 }
