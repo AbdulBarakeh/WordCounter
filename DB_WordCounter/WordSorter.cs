@@ -1,67 +1,34 @@
-﻿namespace DB_WordCounter
+﻿using System.Globalization;
+using System.IO;
+using System.Reflection.PortableExecutable;
+using System.Text.RegularExpressions;
+
+namespace DB_WordCounter
 {
     public class WordSorter
     {
-        internal void Sort(string word, StreamWriter writer)
+
+        //public async Task WordSorting(StreamReader reader, StreamWriter writer)
+        public async Task<IEnumerable<IGrouping<string, string>>> WordSorting(FileStream stream)
         {
-            var firstLetter = word.ToLower().First();
-            switch (firstLetter)
+            using (StreamReader sr = new StreamReader(stream))
             {
-                case 'a':
-                    writer.WriteLineAsync(word+ " ");
-                    break;
-                case 'b':
-                    break;
-                case 'c':
-                    break;
-                case 'd':
-                    break;
-                case 'e':
-                    break;
-                case 'f':
-                    break;
-                case 'g':
-                    break;
-                case 'h':
-                    break;
-                case 'i':
-                    break;
-                case 'j':
-                    break;
-                case 'k':
-                    break;
-                case 'l':
-                    break;
-                case 'm':
-                    break;
-                case 'n':
-                    break;
-                case 'o':
-                    break;
-                case 'p':
-                    break;
-                case 'q':
-                    break;
-                case 'r':
-                    break;
-                case 's':
-                    break;
-                case 't':
-                    break;
-                case 'u':
-                    break;
-                case 'v':
-                    break;
-                case 'w':
-                    break;
-                case 'x':
-                    break;
-                case 'y':
-                    break;
-                case 'z':
-                    break;
-                default:
-                    break;
+                var lines = await sr.ReadToEndAsync();
+                return lines.TrimEnd().Split("\r\n").OrderBy(x => x).GroupBy(x => x);
+
+            }
+
+        }
+
+        public async Task WordSortingInsertion(FileStream stream, IEnumerable<IGrouping<string, string>> groupedWords)
+        {
+            //TODO: Make loop to write words into their own respective files :D 
+            using (StreamWriter sw = new StreamWriter(stream))
+            {
+                foreach (var word in groupedWords.OrderByDescending(x => x.Count()))
+                {
+                    await sw.WriteLineAsync($"{word.Key} {word.Count()}");
+                }
             }
         }
     }
