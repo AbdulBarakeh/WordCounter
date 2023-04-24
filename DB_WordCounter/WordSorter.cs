@@ -7,15 +7,29 @@ namespace DB_WordCounter
 {
     public class WordSorter
     {
+        public async Task<List<string>> WordExclusion(List<string> words)
+        {
 
-        //public async Task WordSorting(StreamReader reader, StreamWriter writer)
-        public async Task<IEnumerable<IGrouping<string, string>>> WordSorting(FileStream stream)
+            using (StreamReader sr = new StreamReader(Constants.ExclusionFilepath()))
+            {
+                List<string> exclusionWords = new List<string>();
+                while (!sr.EndOfStream)
+                {
+                    exclusionWords.Add(await sr.ReadLineAsync());
+                }
+                words.RemoveAll(word => exclusionWords.Contains(word));
+                return words;
+                //Would be nice to remove ToList to not insert all the words in memory
+            }
+        }
+
+        //public async Task<IEnumerable<IGrouping<string, string>>> WordSorting(FileStream stream)
+        public async Task<IOrderedEnumerable<string>> WordSorting(FileStream stream)
         {
             using (StreamReader sr = new StreamReader(stream))
             {
                 var lines = await sr.ReadToEndAsync();
-                return lines.TrimEnd().Split("\r\n").OrderBy(x => x).GroupBy(x => x);
-
+                return lines.TrimEnd().Split("\r\n").OrderBy(x => x);
             }
 
         }

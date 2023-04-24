@@ -11,7 +11,8 @@ namespace DB_WordCounter
     public class WordAnalyzer
     {
         public WordAnalyzer() { }
-        public async Task WordAnalysis(StreamReader reader, WordInserter inserter, WordSorter sorter) {
+        public async Task WordAnalysis(StreamReader reader, WordInserter inserter)
+        {
             try
             {
                 string line;
@@ -20,17 +21,17 @@ namespace DB_WordCounter
                     var regex = @"\b[\S]+\b"; // \b = wordboundary \S all char excluding spaces 
 
                     var matches = Regex.Matches(line, regex, RegexOptions.IgnoreCase | RegexOptions.Multiline);
-                    foreach (Match match in matches)
+                    string filepathWriter = Constants.GeneralFilepath();
+                    using (StreamWriter sw = new StreamWriter(filepathWriter, true))
                     {
-                        string filepathWriter = inserter.GeneralFilepath();
-                        using (StreamWriter sw = new StreamWriter(filepathWriter, true))
+                        foreach (Match match in matches)
                         {
                             await inserter.Insert(match.Value, sw);
                         }
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.WriteLine("Stream is closed");
                 Debug.WriteLine($"{e.Message}");

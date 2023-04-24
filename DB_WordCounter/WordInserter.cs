@@ -2,14 +2,11 @@
 {
     public class WordInserter
     {
-        internal string GeneralFilepath()
-        {
-            return @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt";
-        }
+
 
         internal async Task Insert(string word, StreamWriter writer)
         {
-            await writer.WriteLineAsync(word + " ");
+            await writer.WriteLineAsync(word.ToLower());
         }
     }
 }

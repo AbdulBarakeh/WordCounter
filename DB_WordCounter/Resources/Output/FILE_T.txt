@@ -1,0 +1,6 @@
+tincidunt 20
+tristique 15
+turpis 11
+tempor 8
+tortor 8
+tempus 3
