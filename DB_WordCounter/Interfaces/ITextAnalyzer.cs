@@ -2,6 +2,6 @@
 {
     public interface ITextAnalyzer
     {
-        public Task WordAnalysis(StreamReader reader, ITextInserter inserter);
+        public Task WordAnalysis(StreamReader reader, StreamWriter sw, ITextInserter inserter);
     }
 }

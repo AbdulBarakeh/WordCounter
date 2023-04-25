@@ -15,16 +15,19 @@ namespace Test_DB_WordCounter
             sorter = new WordSorter();
         }
 
-        [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source1.txt", Author = "AABD", Description = "Insert word from stream", TestName = "200 Words insertion")]
-        [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source2.txt", Author = "AABD", Description = "Insert word from stream", TestName = "400 Words insertion")]
-        [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source3.txt", Author = "AABD", Description = "Insert word from stream", TestName = "800 Words insertion")]
-        [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source4.txt", Author = "AABD", Description = "Insert word from stream", TestName = "1600 Words insertion")]
+        [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source1.txt", @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", Author = "AABD", Description = "Insert word from stream", TestName = "200 Words insertion")]
+        [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source2.txt", @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", Author = "AABD", Description = "Insert word from stream", TestName = "400 Words insertion")]
+        [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source3.txt", @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", Author = "AABD", Description = "Insert word from stream", TestName = "800 Words insertion")]
+        [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source4.txt", @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", Author = "AABD", Description = "Insert word from stream", TestName = "1600 Words insertion")]
 
-        public async Task InsertWords(string filepathReader)
+        public async Task InsertWords(string filepathReader, string filepathOutput)
         {
             using (StreamReader sr = new StreamReader(filepathReader))
             {
-                await analyzer.WordAnalysis(sr, inserter);
+                using (StreamWriter sw = new StreamWriter(filepathOutput, true))
+                {
+                    await analyzer.WordAnalysis(sr, sw, inserter);
+                }
             }
         }
 

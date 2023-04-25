@@ -2,7 +2,10 @@
 
 namespace DB_WordCounter
 {
-    public class WordCounter : ITextAnalyzer
+    /// <summary>
+    /// Support class - helps with testing
+    /// </summary>
+    public class WordCounter
     {
 
 
@@ -33,33 +36,5 @@ namespace DB_WordCounter
             }
 
         }
-
-        #region futureImplementation
-
-        public int ParagraphCount(StreamReader reader)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int LineCount(StreamReader reader)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int CharacterCount(StreamReader reader)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int ChapterCount(StreamReader reader)
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-        #endregion
-
-
     }
 }

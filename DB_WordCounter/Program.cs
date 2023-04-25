@@ -18,7 +18,10 @@ namespace DB_WordCounter
             {
                 using (StreamReader sr = new StreamReader(file))
                 {
-                    await wordAnalyzer.WordAnalysis(sr, wordInserter);
+                    using (StreamWriter sw = new StreamWriter(Constants.GeneralFilepath(), true))
+                    {
+                        await wordAnalyzer.WordAnalysis(sr,sw, wordInserter);
+                    }
                 }
                 Console.WriteLine($"insertion for file: {file} - DONE");
             }
