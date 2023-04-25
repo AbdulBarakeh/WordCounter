@@ -1,9 +1,0 @@
-ac 20
-arcu 15
-a 12
-accumsan 12
-aliquam 12
-aliquet 9
-ante 8
-auctor 8
-adipiscing 2

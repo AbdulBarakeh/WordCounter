@@ -1,7 +1,0 @@
-in 27
-id 20
-ipsum 11
-imperdiet 8
-interdum 7
-integer 4
-iaculis 3

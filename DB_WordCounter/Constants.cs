@@ -10,11 +10,20 @@ namespace DB_WordCounter
     {
         public static string GeneralFilepath()
         {
-            return @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt";
+            return @".\Resources\Output\FILE_GENERAL.txt";
+        }
+        public static string ExclusionSourceFilepath()
+        {
+            return @".\Resources\Input\Exclude.txt";
         }
         public static string ExclusionFilepath()
         {
-            return @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Exclude.txt";
+            return @".\Resources\Exclude\Exclude.txt";
+        }
+
+        public static string OutputFolder()
+        {
+            return @".\Resources\Output\";
         }
     }
 }

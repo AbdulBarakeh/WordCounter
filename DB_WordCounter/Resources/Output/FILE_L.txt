@@ -1,8 +1,0 @@
-lacinia 11
-lectus 11
-leo 9
-lobortis 8
-lacus 6
-ligula 6
-luctus 3
-laoreet 2

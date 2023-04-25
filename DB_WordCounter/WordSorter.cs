@@ -10,16 +10,24 @@ namespace DB_WordCounter
         public async Task<List<string>> WordExclusion(List<string> words)
         {
 
-            using (StreamReader sr = new StreamReader(Constants.ExclusionFilepath()))
+            using (StreamReader sr = new StreamReader(Constants.ExclusionSourceFilepath()))
             {
                 List<string> exclusionWords = new List<string>();
                 while (!sr.EndOfStream)
                 {
                     exclusionWords.Add(await sr.ReadLineAsync());
                 }
+                //Could be achieved with GroupBy... Just showing alternative ways :) 
+                var exclusions = exclusionWords.GroupJoin(words, ew => ew, w => w, (ew, w) => new { wordcount = $"{ew} {w.Count()}" });
+                using (StreamWriter sw = new StreamWriter(Constants.ExclusionFilepath(),true))
+                {
+                    foreach (var exclusion in exclusions)
+                    {
+                        await sw.WriteLineAsync(exclusion.wordcount);
+                    }
+                }
                 words.RemoveAll(word => exclusionWords.Contains(word));
                 return words;
-                //Would be nice to remove ToList to not insert all the words in memory
             }
         }
 
@@ -36,12 +44,12 @@ namespace DB_WordCounter
 
         public async Task WordSortingInsertion(IEnumerable<IGrouping<string, string>> groupedWords)
         {
-            var rootPath = @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\";
+            var rootPath = Constants.OutputFolder();
             foreach (var word in groupedWords.OrderByDescending(x => x.Count()))
             {
                 var currentFilepath = $"FILE_{word.Key.ToUpper().First()}.txt";
                 var fullPath = $@"{rootPath}\{currentFilepath}";
-                using (StreamWriter sw = new StreamWriter(fullPath,true))//new FileStreamOptions() { Access=FileAccess.Write,Mode=FileMode.OpenOrCreate,Options=FileOptions.Asynchronous}))
+                using (StreamWriter sw = new StreamWriter(fullPath, true))//new FileStreamOptions() { Access=FileAccess.Write,Mode=FileMode.OpenOrCreate,Options=FileOptions.Asynchronous}))
                 {
                     await sw.WriteLineAsync($"{word.Key} {word.Count()}");
                 }
