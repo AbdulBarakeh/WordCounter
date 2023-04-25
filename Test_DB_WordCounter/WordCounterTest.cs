@@ -21,12 +21,13 @@ namespace Test_DB_WordCounter
         }
 
 
-        [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source1.txt", @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", Author = "AABD", Description = "Analyze words",ExpectedResult = 200, TestName = "200 - Analyzer test")]
-        [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source2.txt", @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", Author = "AABD", Description = "Analyze words",ExpectedResult = 400, TestName = "400 - Analyzer test")]
-        [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source3.txt", @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", Author = "AABD", Description = "Analyze words",ExpectedResult = 800, TestName = "800 - Analyzer test")]
-        [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source4.txt", @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", Author = "AABD", Description = "Analyze words",ExpectedResult = 1600, TestName = "1600 - Analyzer test")]
+        [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source1.txt", @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt",ExpectedResult = 200, Author = "AABD", Description = "Analyze words", TestName = "200 - Analyzer test")]
+        [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source2.txt", @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", ExpectedResult = 400, Author = "AABD", Description = "Analyze words", TestName = "400 - Analyzer test")]
+        [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source3.txt", @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", ExpectedResult = 800, Author = "AABD", Description = "Analyze words", TestName = "800 - Analyzer test")]
+        [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source4.txt", @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", ExpectedResult = 1600, Author = "AABD", Description = "Analyze words", TestName = "1600 - Analyzer test")]
         public async Task<int> InsertWords(string filepathInput,string filepathOutput)
         {
+            int wordCount = 0;
             File.Delete(filepathOutput);
             using (StreamReader sr = new StreamReader(filepathInput))
             {
@@ -37,10 +38,19 @@ namespace Test_DB_WordCounter
             }
             using (StreamReader sr = new StreamReader(filepathOutput))
             {
-                return await counter.WordCount(sr);
+                wordCount = await counter.WordCount(sr);
             }
+            return wordCount;
+            //Assert.That(wordCount, Is.EqualTo(expectedResult));
 
         }
+        //[TestCase(Author ="AABD",Description ="",ExpectedResult = 56)]
+        //public int Test()
+        //{
+        //    int num = 56;
+        //    return num;
+        //    //Assert.That(num, Is.EqualTo(5));
+        //}
 
         //[TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", Author = "AABD", Description = "Insert word from stream", TestName = "200 Words Sorting")]
         //[TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", Author = "AABD", Description = "Insert word from stream", TestName = "400 Words Sorting")]

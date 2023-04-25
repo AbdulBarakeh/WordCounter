@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace DB_WordCounter
+namespace DB_WordCounter.Classes
 {
     /// <summary>
     /// Support class - helps with testing
