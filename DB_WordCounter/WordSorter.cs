@@ -1,9 +1,4 @@
-﻿using System.Globalization;
-using System.IO;
-using System.Reflection.PortableExecutable;
-using System.Text.RegularExpressions;
-
-namespace DB_WordCounter
+﻿namespace DB_WordCounter
 {
     public class WordSorter
     {
@@ -19,7 +14,7 @@ namespace DB_WordCounter
                 }
                 //Could be achieved with GroupBy... Just showing alternative ways :) 
                 var exclusions = exclusionWords.GroupJoin(words, ew => ew, w => w, (ew, w) => new { wordcount = $"{ew} {w.Count()}" });
-                using (StreamWriter sw = new StreamWriter(Constants.ExclusionFilepath(),true))
+                using (StreamWriter sw = new StreamWriter(Constants.ExclusionFilepath(), true))
                 {
                     foreach (var exclusion in exclusions)
                     {

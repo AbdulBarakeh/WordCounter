@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace DB_WordCounter
 {
@@ -29,7 +23,7 @@ namespace DB_WordCounter
                     var matches = Regex.Matches(line, regex, RegexOptions.IgnoreCase | RegexOptions.Multiline);
                     wordCount += matches.Count;
                 }
-                
+
                 return wordCount;
             }
             catch
@@ -40,7 +34,7 @@ namespace DB_WordCounter
 
         }
 
-#region futureImplementation
+        #region futureImplementation
 
         public int ParagraphCount(StreamReader reader)
         {

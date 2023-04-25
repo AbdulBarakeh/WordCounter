@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace DB_WordCounter
+﻿namespace DB_WordCounter
 {
     internal class Program
     {

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Test_DB_WordCounter
+﻿namespace Test_DB_WordCounter
 {
     internal class WordAnalyzerTest
     {
@@ -24,7 +17,7 @@ namespace Test_DB_WordCounter
         [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source2.txt", Author = "AABD", Description = "Insert word from stream", TestName = "400 Words insertion")]
         [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source3.txt", Author = "AABD", Description = "Insert word from stream", TestName = "800 Words insertion")]
         [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source4.txt", Author = "AABD", Description = "Insert word from stream", TestName = "1600 Words insertion")]
-        
+
         public async Task InsertWords(string filepathReader)
         {
             using (StreamReader sr = new StreamReader(filepathReader))

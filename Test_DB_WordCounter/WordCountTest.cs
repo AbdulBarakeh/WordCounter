@@ -2,7 +2,7 @@ namespace Test_DB_WordCounter
 {
     public class Tests
     {
-        DB_WordCounter.WordCounter counter; 
+        DB_WordCounter.WordCounter counter;
         [SetUp]
         public void Setup()
         {
@@ -15,7 +15,7 @@ namespace Test_DB_WordCounter
         [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source4.txt", Author = "AABD", Description = "Get wordcount from stream", ExpectedResult = 1600, TestName = "1600 Words")]
         public async Task<int> CountWords(string filepath)
         {
-            using(StreamReader sr = new StreamReader(filepath))
+            using (StreamReader sr = new StreamReader(filepath))
             {
                 return await counter.WordCount(sr);
             }
