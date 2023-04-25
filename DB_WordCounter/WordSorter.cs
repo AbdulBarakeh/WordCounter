@@ -10,7 +10,11 @@
                 List<string> exclusionWords = new List<string>();
                 while (!sr.EndOfStream)
                 {
-                    exclusionWords.Add(await sr.ReadLineAsync());
+                    var word = await sr.ReadLineAsync();
+                    if (word != null)
+                    {
+                        exclusionWords.Add(word);
+                    }
                 }
                 //Could be achieved with GroupBy... Just showing alternative ways :) 
                 var exclusions = exclusionWords.GroupJoin(words, ew => ew, w => w, (ew, w) => new { wordcount = $"{ew} {w.Count()}" });

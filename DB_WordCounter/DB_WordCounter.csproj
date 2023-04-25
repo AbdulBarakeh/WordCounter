@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="WordCounter.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Resources\Output\" />
   </ItemGroup>
 

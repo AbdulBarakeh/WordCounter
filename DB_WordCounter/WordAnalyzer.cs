@@ -3,15 +3,15 @@ using System.Text.RegularExpressions;
 
 namespace DB_WordCounter
 {
-    public class WordAnalyzer
+    public class WordAnalyzer 
     {
         public WordAnalyzer() { }
         public async Task WordAnalysis(StreamReader reader, WordInserter inserter)
         {
             try
             {
-                string line;
-                while ((line = await reader.ReadLineAsync()) != null)
+                string? line = await reader.ReadLineAsync();
+                while (line != null)
                 {
                     var regex = @"\b[\S]+\b"; // \b = wordboundary \S all char excluding spaces 
 
