@@ -1,17 +1,18 @@
 ﻿using System.Diagnostics;
 using System.Text.RegularExpressions;
+using DB_WordCounter.Interfaces;
 
-namespace DB_WordCounter
+namespace DB_WordCounter.Classes
 {
-    public class WordAnalyzer 
+    public class WordAnalyzer : ITextAnalyzer
     {
         public WordAnalyzer() { }
-        public async Task WordAnalysis(StreamReader reader, WordInserter inserter)
+        public async Task WordAnalysis(StreamReader reader, ITextInserter inserter)
         {
             try
             {
-                string? line = await reader.ReadLineAsync();
-                while (line != null)
+                string line;
+                while ((line= await reader.ReadLineAsync()) != null)
                 {
                     var regex = @"\b[\S]+\b"; // \b = wordboundary \S all char excluding spaces 
 
@@ -21,7 +22,7 @@ namespace DB_WordCounter
                     {
                         foreach (Match match in matches)
                         {
-                            await inserter.Insert(match.Value, sw);
+                            await inserter.InsertWord(match.Value, sw);
                         }
                     }
                 }
