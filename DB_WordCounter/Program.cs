@@ -1,9 +1,12 @@
-﻿namespace DB_WordCounter
+﻿using DB_WordCounter.Classes;
+
+namespace DB_WordCounter
 {
     internal class Program
     {
         static async Task Main(string[] args)
         {
+            //var dir = "./Resources";
             var dir = args[0];
             var files = Directory.GetFiles(dir + @"\Input");
             var sourceFiles = files.Where(x => x.Contains("Source"));
@@ -26,11 +29,10 @@
                 words = await wordSorter.WordSorting(fs);
             }
             var approvedWords = await wordSorter.WordExclusion(words.ToList());
-            var groupedWords = approvedWords.GroupBy(x => x);
-            await wordSorter.WordSortingInsertion(groupedWords);
+            await wordSorter.WordSortingInsertion(approvedWords);
             Console.WriteLine($"sorting for all files - DONE");
 
-
+            Console.WriteLine($"Program is done - click ENTER to terminate program");
             Console.ReadLine();
         }
     }

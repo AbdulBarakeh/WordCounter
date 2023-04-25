@@ -1,16 +1,18 @@
-﻿namespace Test_DB_WordCounter
+﻿using DB_WordCounter.Classes;
+
+namespace Test_DB_WordCounter
 {
     internal class WordAnalyzerTest
     {
-        DB_WordCounter.WordAnalyzer analyzer;
-        DB_WordCounter.WordInserter inserter;
-        DB_WordCounter.WordSorter sorter;
+        WordAnalyzer analyzer;
+        WordInserter inserter;
+        WordSorter sorter;
         [SetUp]
         public void Setup()
         {
-            analyzer = new DB_WordCounter.WordAnalyzer();
-            inserter = new DB_WordCounter.WordInserter();
-            sorter = new DB_WordCounter.WordSorter();
+            analyzer = new WordAnalyzer();
+            inserter = new WordInserter();
+            sorter = new WordSorter();
         }
 
         [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source1.txt", Author = "AABD", Description = "Insert word from stream", TestName = "200 Words insertion")]
@@ -32,16 +34,13 @@
         [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", Author = "AABD", Description = "Insert word from stream", TestName = "1600 Words Sorting")]
         public async Task SortWords(string filepath)
         {
-            //IEnumerable<IGrouping<string, string>> groupedWords;
             IEnumerable<string> words;
             using (FileStream fs = new FileStream(filepath, FileMode.Open, FileAccess.Read))
             {
-                //groupedWords = await sorter.WordSorting(fs);
                 words = await sorter.WordSorting(fs);
             }
             var approvedWords = await sorter.WordExclusion(words.ToList());
-            var groupedWords = approvedWords.GroupBy(x => x);
-            await sorter.WordSortingInsertion(groupedWords);
+            await sorter.WordSortingInsertion(approvedWords);
         }
     }
 }
