@@ -26,3 +26,19 @@ By attempting to make the code asynchronus it's possible to utilize more of the 
 ## Possible improvements
 Make the project run in the exact same way but remove the **FILE_GENERAL.txt** file that contains all the words from all the other sourcefiles. The closer the number of files get to infinity the closer the file size of **FILE_GENERAL.txt** gets to infinity. This can possibly give MemoryExceptions and in general lower the efficiency of the program.
 
+## Project structure
+The below image shows the different components used to build the WordCounter software. 
+Some of the thoughts behind the chosen structure:
+* Implement interface to create a more loose coupling, and enable easier maintainability
+* Create components with only a single responsibility
+* Dependency injection on method-level, enables the code to be extended without being modified due to the dependency being on an interface and not on a specific class.
+![WordCounter_Diagram](https://user-images.githubusercontent.com/44008172/234650546-ecdbcf16-5e28-410a-b09e-49f7ed1521fa.png)
+
+## Iterations/Process
+The software were built in iterations (listed below). This helped keep me on track with the requirements. For every iteration I would write some test that helped me ensure that the current state of the software were usable as expected. This also helped me uphold a good code structure and made it easier to implement the functionality within the components.
+
+1. Read one file, and count all words in one file.
+2. Split wordcount into multiple files.
+3. Add exclusion functionality.
+4. Read from multiple sourcefiles.
+
