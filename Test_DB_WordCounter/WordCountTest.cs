@@ -1,6 +1,6 @@
 namespace Test_DB_WordCounter
 {
-    public class Tests
+    public class WordCountTest
     {
         DB_WordCounter.Classes.WordCounter counter;
         [SetUp]
