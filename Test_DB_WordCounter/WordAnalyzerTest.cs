@@ -45,7 +45,7 @@ namespace Test_DB_WordCounter
                 words = await sorter.WordSorting(fs);
             }
             var approvedWords = await excluder.WordExclusion(words.ToList(),inserter);
-            await sorter.WordSortingInsertion(approvedWords,inserter);
+            await sorter.WordSortingInsertion(approvedWords,inserter,Constants.OutputFolder());
         }
     }
 }

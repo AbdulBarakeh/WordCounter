@@ -15,10 +15,9 @@ namespace DB_WordCounter.Classes
 
         }
 
-        public async Task WordSortingInsertion(List<string> approvedwords, ITextInserter inserter)
+        public async Task WordSortingInsertion(List<string> approvedwords, ITextInserter inserter, string rootPath)
         {
             var groupedWords = approvedwords.GroupBy(x => x);
-            var rootPath = Constants.OutputFolder();
             foreach (var word in groupedWords.OrderByDescending(x => x.Count()))
             {
                 var currentFilepath = $"FILE_{word.Key.ToUpper().First()}.txt";

@@ -33,7 +33,7 @@ namespace DB_WordCounter
                 words = await wordSorter.WordSorting(fs);
             }
             var approvedWords = await wordExcluder.WordExclusion(words.ToList(),wordInserter);
-            await wordSorter.WordSortingInsertion(approvedWords,wordInserter);
+            await wordSorter.WordSortingInsertion(approvedWords,wordInserter,Constants.OutputFolder());
             Console.WriteLine($"sorting for all files - DONE");
 
             Console.WriteLine($"Program is done - click ENTER to terminate program");

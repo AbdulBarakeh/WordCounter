@@ -1,6 +1,7 @@
 ﻿using DB_WordCounter;
 using DB_WordCounter.Classes;
 using DB_WordCounter.Interfaces;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Test_DB_WordCounter
 {
@@ -17,18 +18,30 @@ namespace Test_DB_WordCounter
             inserter = new WordInserter();
             sorter = new WordSorter();
             counter = new WordCounter();
-            
+
         }
 
-
-        [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source1.txt", @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt",ExpectedResult = 200, Author = "AABD", Description = "Analyze words", TestName = "200 - Analyzer test")]
-        [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source2.txt", @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", ExpectedResult = 400, Author = "AABD", Description = "Analyze words", TestName = "400 - Analyzer test")]
-        [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source3.txt", @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", ExpectedResult = 800, Author = "AABD", Description = "Analyze words", TestName = "800 - Analyzer test")]
-        [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source4.txt", @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", ExpectedResult = 1600, Author = "AABD", Description = "Analyze words", TestName = "1600 - Analyzer test")]
+        /// <summary>
+        /// Reads the text within the sourcefiles and inserts them in an output file.
+        /// The test then counts the words to see if all the words were analysed and inserted
+        /// </summary>
+        /// <param name="filepathInput"></param>
+        /// <param name="filepathOutput"></param>
+        /// <returns>returns word count</returns>
+        [TestCase(@".\Resources\Input\Source1.txt", @".\Resources\Output\FILE_GENERAL.txt",ExpectedResult = 200, Author = "AABD", Description = "Analyze words", TestName =  "Analyzer test - 200")]
+        [TestCase(@".\Resources\Input\Source2.txt", @".\Resources\Output\FILE_GENERAL.txt", ExpectedResult = 400, Author = "AABD", Description = "Analyze words", TestName = "Analyzer test - 400")]
+        [TestCase(@".\Resources\Input\Source3.txt", @".\Resources\Output\FILE_GENERAL.txt", ExpectedResult = 800, Author = "AABD", Description = "Analyze words", TestName = "Analyzer test - 800")]
+        [TestCase(@".\Resources\Input\Source4.txt", @".\Resources\Output\FILE_GENERAL.txt", ExpectedResult = 1600, Author = "AABD", Description = "Analyze words", TestName ="Analyzer test - 1600")]
         public async Task<int> InsertWords(string filepathInput,string filepathOutput)
         {
             int wordCount = 0;
-            File.Delete(filepathOutput);
+            var outputRoot = Path.GetDirectoryName(filepathOutput);
+            var files = Directory.GetFiles(outputRoot);
+            foreach (var item in files)
+            {
+                File.Delete(item);
+            }
+            
             using (StreamReader sr = new StreamReader(filepathInput))
             {
                 using (StreamWriter sw = new StreamWriter(filepathOutput, true))
@@ -41,31 +54,29 @@ namespace Test_DB_WordCounter
                 wordCount = await counter.WordCount(sr);
             }
             return wordCount;
-            //Assert.That(wordCount, Is.EqualTo(expectedResult));
 
         }
-        //[TestCase(Author ="AABD",Description ="",ExpectedResult = 56)]
-        //public int Test()
-        //{
-        //    int num = 56;
-        //    return num;
-        //    //Assert.That(num, Is.EqualTo(5));
-        //}
 
-        //[TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", Author = "AABD", Description = "Insert word from stream", TestName = "200 Words Sorting")]
-        //[TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", Author = "AABD", Description = "Insert word from stream", TestName = "400 Words Sorting")]
-        //[TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", Author = "AABD", Description = "Insert word from stream", TestName = "800 Words Sorting")]
-        //[TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", Author = "AABD", Description = "Insert word from stream", TestName = "1600 Words Sorting")]
-        //public async Task SortWords(string filepath)
-        //{
-        //    IEnumerable<string> words;
-        //    using (FileStream fs = new FileStream(filepath, FileMode.Open, FileAccess.Read))
-        //    {
-        //        words = await sorter.WordSorting(fs);
-        //    }
-        //    var approvedWords = await sorter.WordExclusion(words.ToList());
-        //    var groupedWords = approvedWords.GroupBy(x => x);
-        //    await sorter.WordSortingInsertion(groupedWords);
-        //}
+        /// <summary>
+        /// Sorts words into files
+        /// </summary>
+        /// <param name="filepathInput"></param>
+        /// <param name="filepathGeneral"></param>
+        /// <param name="filepathOutput"></param>
+        [TestCase(@".\Resources\Input\Source1.txt", @".\Resources\Output\FILE_GENERAL.txt", @".\Resources\Output", Author = "AABD", Description = "Sort words", TestName = "Sorter test - 200")]
+        [TestCase(@".\Resources\Input\Source2.txt", @".\Resources\Output\FILE_GENERAL.txt", @".\Resources\Output", Author = "AABD", Description = "Sort words", TestName = "Sorter test - 400")]
+        [TestCase(@".\Resources\Input\Source3.txt", @".\Resources\Output\FILE_GENERAL.txt", @".\Resources\Output", Author = "AABD", Description = "Sort words", TestName = "Sorter test - 800")]
+        [TestCase(@".\Resources\Input\Source4.txt", @".\Resources\Output\FILE_GENERAL.txt", @".\Resources\Output", Author = "AABD", Description = "Sort words", TestName = "Sorter test - 1600")]
+        public async Task SortWords(string filepathInput, string filepathGeneral, string filepathOutput)
+        {
+            await InsertWords(filepathInput, filepathGeneral);
+            IEnumerable<string> words;
+            using (FileStream stream = new FileStream(filepathGeneral, FileMode.Open, FileAccess.Read))
+            {
+                words = await sorter.WordSorting(stream);
+            }
+            await sorter.WordSortingInsertion(words.ToList(),inserter,filepathOutput);
+
+        }
     }
 }
