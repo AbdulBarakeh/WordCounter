@@ -21,7 +21,7 @@ By attempting to use streams to read and write data, I've improved the efficienc
 However due to timelimits it wasn't possible to apply this principle everywhere, and the code is in someplaces saving and processing data in memory, which can become a problem with larger datasets.
 
 ## Running on multicore CPU
-By attempting to make the code asynchronus it's possible to utilize more of the CPU's resources, and enables the code to run in parallel, thereby gaining an improved efficiency.
+By attempting to make the code asynchronus it's possible to utilize more of the CPU's resources, by enabling the code to run in parallel, thereby gaining an improved efficiency.
 
 ## Possible improvements
 Make the project run in the exact same way but remove the **FILE_GENERAL.txt** file that contains all the words from all the other sourcefiles. The closer the number of files get to infinity the closer the file size of **FILE_GENERAL.txt** gets to infinity. This can possibly give MemoryExceptions and in general lower the efficiency of the program.
