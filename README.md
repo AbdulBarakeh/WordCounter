@@ -35,7 +35,7 @@ Some of the thoughts behind the chosen structure:
 ![WordCounter_Diagram](https://user-images.githubusercontent.com/44008172/234650546-ecdbcf16-5e28-410a-b09e-49f7ed1521fa.png)
 
 ## Iterations/Process
-The software were built in iterations (listed below). This helped keep me on track with the requirements. For every iteration I would write some tests that helped me ensure that the current state of the software was usable as expected. This also helped me uphold a good code structure, and made it easier to implement the functionality within the components. ***OBS. Keep in mind that not all tests run successfully, that is on purpose. Unsuccessfull tests were part of the component testing process and have not been updated. These are kept for transparency reasons***
+The software were built in iterations (listed below). This helped keep me on track with the requirements. For every iteration I would write some tests that helped me ensure that the current state of the software was usable as expected. This also helped me uphold a good code structure, and made it easier to implement the functionality within the components. ***OBS. Keep in mind that not all tests run successfully, that is on purpose. Unsuccessfull tests were part of the component testing process and have not been updated. These are kept for transparency reasons.***
 
 1. Read one file, and count all words in one file.
 2. Split wordcount into multiple files.
