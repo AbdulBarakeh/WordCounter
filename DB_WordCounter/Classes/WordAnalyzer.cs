@@ -6,7 +6,6 @@ namespace DB_WordCounter.Classes
 {
     public class WordAnalyzer : ITextAnalyzer
     {
-        public WordAnalyzer() { }
         public async Task WordAnalysis(StreamReader reader, StreamWriter sw, ITextInserter inserter)
         {
             try

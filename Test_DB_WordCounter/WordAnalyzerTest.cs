@@ -7,12 +7,14 @@ namespace Test_DB_WordCounter
         WordAnalyzer analyzer;
         WordInserter inserter;
         WordSorter sorter;
+        WordExcluder excluder;
         [SetUp]
         public void Setup()
         {
             analyzer = new WordAnalyzer();
             inserter = new WordInserter();
             sorter = new WordSorter();
+            excluder = new WordExcluder();
         }
 
         [TestCase(@"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Input\Source1.txt", @"C:\Users\abdul\Desktop\Work\DanskeBank\Assignment\DB_WordCounter\Resources\Output\FILE_GENERAL.txt", Author = "AABD", Description = "Insert word from stream", TestName = "200 Words insertion")]
@@ -42,8 +44,8 @@ namespace Test_DB_WordCounter
             {
                 words = await sorter.WordSorting(fs);
             }
-            var approvedWords = await sorter.WordExclusion(words.ToList());
-            await sorter.WordSortingInsertion(approvedWords);
+            var approvedWords = await excluder.WordExclusion(words.ToList(),inserter);
+            await sorter.WordSortingInsertion(approvedWords,inserter);
         }
     }
 }

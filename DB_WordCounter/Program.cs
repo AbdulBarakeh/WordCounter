@@ -13,6 +13,7 @@ namespace DB_WordCounter
             var wordAnalyzer = new WordAnalyzer();
             var wordInserter = new WordInserter();
             var wordSorter = new WordSorter();
+            var wordExcluder = new WordExcluder();
 
             foreach (var file in sourceFiles)
             {
@@ -31,8 +32,8 @@ namespace DB_WordCounter
             {
                 words = await wordSorter.WordSorting(fs);
             }
-            var approvedWords = await wordSorter.WordExclusion(words.ToList());
-            await wordSorter.WordSortingInsertion(approvedWords);
+            var approvedWords = await wordExcluder.WordExclusion(words.ToList(),wordInserter);
+            await wordSorter.WordSortingInsertion(approvedWords,wordInserter);
             Console.WriteLine($"sorting for all files - DONE");
 
             Console.WriteLine($"Program is done - click ENTER to terminate program");
