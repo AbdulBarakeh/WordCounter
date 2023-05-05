@@ -6,8 +6,9 @@ namespace DB_WordCounter
     {
         static async Task Main(string[] args)
         {
-            //var dir = "./Resources"; //Debug purposes 
-            var dir = args[0];
+            Console.WriteLine("Write Path to Resource folder");
+            Console.Write("Path: ");
+            var dir = Console.ReadLine()?.Trim();
             var files = Directory.GetFiles(dir + @"\Input");
             var sourceFiles = files.Where(x => x.Contains("Source"));
             var wordAnalyzer = new WordAnalyzer();
