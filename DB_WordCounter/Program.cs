@@ -37,7 +37,7 @@ namespace DB_WordCounter
             await wordSorter.WordSortingInsertion(approvedWords,wordInserter,Constants.OutputFolder());
             Console.WriteLine($"sorting for all files - DONE");
 
-            Console.WriteLine($"Program is done - click ENTER to terminate program");
+            Console.WriteLine($"Program is done - press ENTER to terminate program");
             Console.ReadLine();
         }
     }
