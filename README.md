@@ -3,12 +3,8 @@
 ## To run this project
 To be able to run this project you need a directory structure that resembles the following:
 
-- ./YourRandomDirectory
-      - Source1.txt
-      - Source2.txt
-      - Source3.txt
-      - Source4.txt
-      - Exclude.txt
+![image](https://github.com/AbdulBarakeh/WordCounter/assets/44008172/5cf03925-91cf-4334-a74b-22b743d9d4a6)
+
 
 The "Source" files contains a list of words to be sorted and counted, where every word is seperated by a space character. The exclude file contains words to be exclude, where words are seperated by a newline character.
 The program will generate the folders **Output** and **Exclude** that will contain the counted words and the excluded words respectively. 
