@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DB_WordCounter.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace DB_WordCounter.Interfaces
 {
     internal interface ITextExcluder
     {
-        public Task<List<string>> WordExclusion(List<string> words, ITextInserter inserter);
+        public Task<List<string>> WordExclusion(List<string> words, ITextInserter inserter,DirectorySetter directorySetter);
 
     }
 }

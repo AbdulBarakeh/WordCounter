@@ -3,11 +3,11 @@
   <Comment CommentText="WordCounter is not used directly, but is used to help test the modules">
     <Position X="1.942" Y="0.858" Height="0.75" Width="1.7" />
   </Comment>
-  <Class Name="DB_WordCounter.Classes.Constants">
+  <Class Name="DB_WordCounter.Classes.DirectorySetter">
     <Position X="3.75" Y="2" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAACAAQAAAAAIAAA=</HashCode>
-      <FileName>Classes\Constants.cs</FileName>
+      <HashCode>AAAAAAgAAAAAAAAAAgAAAAAAAAAAAACAAQAAAAAIAAA=</HashCode>
+      <FileName>Classes\DirectorySetter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DB_WordCounter.Classes.WordAnalyzer" BaseTypeListCollapsed="true">
@@ -73,7 +73,7 @@
   <Interface Name="DB_WordCounter.Interfaces.ITextSorter">
     <Position X="8.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
       <FileName>Interfaces\ITextSorter.cs</FileName>
     </TypeIdentifier>
   </Interface>

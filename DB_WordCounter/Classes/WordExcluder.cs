@@ -9,10 +9,10 @@ namespace DB_WordCounter.Classes
 {
     public class WordExcluder : ITextExcluder
     {
-        public async Task<List<string>> WordExclusion(List<string> words, ITextInserter inserter)
+        public async Task<List<string>> WordExclusion(List<string> words, ITextInserter inserter, DirectorySetter? directorySetter)
         {
 
-            using (StreamReader sr = new StreamReader(Constants.ExclusionSourceFilepath()))
+            using (StreamReader sr = new StreamReader(directorySetter.ExclusionSourceFilepath()))
             {
                 List<string> exclusionWords = new List<string>();
                 while (!sr.EndOfStream)
@@ -25,7 +25,7 @@ namespace DB_WordCounter.Classes
                 }
                 //Could be achieved with GroupBy... Just showing alternative ways :) 
                 var exclusions = exclusionWords.GroupJoin(words, ew => ew, w => w, (ew, w) => new { wordcount = $"{ew} {w.Count()}" });
-                using (StreamWriter sw = new StreamWriter(Constants.ExclusionFilepath(), true))
+                using (StreamWriter sw = new StreamWriter(directorySetter.ExclusionFilepath(), true))
                 {
                     foreach (var exclusion in exclusions)
                     {
