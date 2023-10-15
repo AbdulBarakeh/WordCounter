@@ -1,9 +1,0 @@
-donec 24
-dui 22
-dolor 21
-diam 19
-dictum 19
-dignissim 17
-duis 17
-dapibus 15
-dis 4

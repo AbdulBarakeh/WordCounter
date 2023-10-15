@@ -397,3 +397,5 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 /ChatGPTVersion
+/DB_WordCounter/InputDirectory/Exclude/
+/DB_WordCounter/InputDirectory/Output/
